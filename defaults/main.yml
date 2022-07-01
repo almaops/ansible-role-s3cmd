@@ -1,0 +1,6 @@
+---
+s3cmd_task_prefix: "=== S3CMD ==="
+s3cmd_path_cfg: "/opt/s3cfg"
+s3cmd_template_cfg: "s3cfg.j2"
+s3cmd_configs: []
+...

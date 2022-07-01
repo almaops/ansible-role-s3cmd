@@ -1,0 +1,24 @@
+---
+
+- name: "{{ s3cmd_task_prefix }} install s3cmd"
+  ansible.builtin.include_role:
+    name: almaops.pip_install
+  vars:
+    pip_install_packages:
+      - s3cmd
+
+- name: "{{ s3cmd_task_prefix }} create directory {{ s3cmd_path_cfg }}"
+  file:
+    path: "{{ s3cmd_path_cfg }}"
+    state: directory
+    recurse: true
+
+- name: "{{ s3cmd_task_prefix }} copy s3cmd configurations"
+  template:
+    src: "{{ s3cmd_template_cfg }}"
+    dest: "{{ s3cmd_path_cfg }}/{{ s3cfg.name }}"
+  loop: "{{ s3cmd_configs }}"
+  loop_control:
+    loop_var: s3cfg
+  
+...
